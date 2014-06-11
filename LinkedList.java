@@ -8,7 +8,6 @@ public class LinkedList implements IList
 	Node next = head;
 	Node tail = head;
 	
-	// add to end of list
 	public void insertTail(Object d)
 	{
 		// constructor automatically sets next to null
@@ -52,6 +51,59 @@ public class LinkedList implements IList
 		}
 	}
 	
+	public void deleteHead()
+	{
+		head = head.getNext();
+	}
+	public void deleteTail()
+	{
+		Node current = head;
+		Node prev = null;
+		// find end of list and previous element
+		while(true)
+		{
+			//head==tail
+			if(current.getNext()==null){deleteHead();break;}
+			else 
+			{
+				prev = current;
+				current = current.getNext();
+				
+				//reached end of list
+				if(current==null)break;
+			}
+		}
+		tail=prev;
+		tail.setNext(null);
+	}
+	
+	public void delete(int index)
+	{
+		Node current = head;
+		Node prev = null;
+		// find end of list and previous element
+		while(true)
+		{
+			//head
+			if(index==0){deleteHead();break;}
+			//tail
+			else if(index == this.length()-1){deleteTail(); break;}
+			else 
+			{
+				prev = current;
+				current = current.getNext();
+				
+				//reached end of list
+				if(current==null)break;
+			}
+		}
+		tail=prev;
+		tail.setNext(null);
+		
+		
+	}
+	
+	
 	// traverse LinkedList
 	public Node next()
 	{
@@ -60,7 +112,7 @@ public class LinkedList implements IList
 		// end of list.. reset next to head and return null
 		else{next=head; return null;}
 	}
-		
+	
 	public int length()
 	{
 		int count=0;
@@ -84,6 +136,12 @@ interface IList
 	void insert(Object n, int index);
 	// insert at end of list
 	void insertTail(Object d);
+	// delete from head
+	void deleteHead();
+	// delete from specific location
+	void delete(int index);
+	// delete from tail
+	void deleteTail();
 	// method to traverse list
 	Node next();
 	// number of nodes in list
