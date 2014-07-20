@@ -1,4 +1,5 @@
 // given N integers as command line arguments determine how many triples sum to zero
+// brute-force O(N^3)
 
 public class ThreeSum
 {
